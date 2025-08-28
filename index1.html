@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>رامک - بازی</title>
+
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+
+  <style>
+    /* Hidden iframe initially */
+    #gameFrame {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: none;
+      border: none;
+      z-index: 10; /* on top of AR */
+      background: transparent; /* keep transparent to see the room */
+    }
+    #mindar-ui,
+    #mindar-ui-scanning {
+    display: none !important;
+  }
+
+  </style>
+</head>
+<body>
+
+  <!-- AR Scene -->
+  <a-scene mindar-image="imageTargetSrc: cow2.mind;" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+    <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+    <a-entity mindar-image-target="targetIndex: 0">
+      <!-- Optional AR content, like a plane -->
+      
+    </a-entity>
+  </a-scene>
+
+  <!-- Hidden iframe -->
+  <iframe id="gameFrame" src="https://sorchi.liara.run/"></iframe>
+
+  <script>
+    const iframe = document.getElementById('gameFrame');
+    const scene = document.querySelector('a-scene');
+
+    scene.addEventListener('targetFound', () => {
+      iframe.style.display = 'block'; // show iframe
+
+        // hide AR video and canvas completely
+ 
+  
+
+    });
+
+    scene.addEventListener('targetLost', () => {
+      iframe.style.display = 'block'; // hide iframe
+    });
+
+  </script>
+
+</body>
+</html>
